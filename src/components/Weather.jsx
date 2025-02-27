@@ -6,7 +6,7 @@ const Weather = () => {
 
     return (
             <div className="infoWeath">
-                {data && data.name && data.sys && data.main ? (
+                {data.name && data.sys && data.main ? (
                     <>
                         <p>{`Location: ${data.name}, ${data.sys.country}`}</p>
                         <p>{`Temp: ${data.main.temp} °C`}</p>
