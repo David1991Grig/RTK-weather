@@ -1,6 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { fetchData, fetchDataSuccess, fetchDataFailure } from '../redux/actions';
-import { api_key, base_url } from '../utils/constants';
+import {getWeather} from "../features/slices/weatherSlice.js";
+import {fetchAction} from "../features/action/fetchAction.js";
+
+
 
 const Form = () => {
     const dispatch = useDispatch();
@@ -9,17 +11,8 @@ const Form = () => {
         e.preventDefault();
         const city = e.target.city.value.trim();
         if (city) {
-            dispatch(fetchData());
-            try {
-                const response = await fetch(`${base_url}?q=${city}&appid=${api_key}&units=metric`);
-                if (!response.ok) {
-                    throw new Error('Enter correct city name');
-                }
-                const data = await response.json();
-                dispatch(fetchDataSuccess(data));
-            } catch (err) {
-                dispatch(fetchDataFailure(err.message));
-            }
+            dispatch(fetchAction(city));
+
         } else {
             alert('Please enter a city name');
         }
